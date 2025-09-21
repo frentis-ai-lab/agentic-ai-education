@@ -8,7 +8,6 @@ from typing import List
 
 from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
-from langchain.schema import HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
 from mem0 import MemoryClient
 
@@ -36,14 +35,13 @@ def main() -> None:
 
     prompt = ChatPromptTemplate.from_messages(
         [
-            SystemMessage(content=SYSTEM_PROMPT),
-            HumanMessage(
-                content=(
-                    "memories 목록:\n{memories_text}\n\n"
-                    "원본 memories(JSON): {memories_json}\n\n"
-                    "위 기억을 참고하여 사용자 메시지에 답변하세요.\n"
-                    "사용자: {user_message}"
-                )
+            ("system", SYSTEM_PROMPT),
+            (
+                "human",
+                "memories 목록:\n{memories_text}\n\n"
+                "원본 memories(JSON): {memories_json}\n\n"
+                "위 기억을 참고하여 사용자 메시지에 답변하세요.\n"
+                "사용자: {user_message}",
             ),
         ]
     )
