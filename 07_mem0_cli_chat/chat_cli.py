@@ -38,8 +38,9 @@ def main() -> None:
             SystemMessage(content=SYSTEM_PROMPT),
             HumanMessage(
                 content=(
-                    "참고할 memories:\n{memories_text}\n\n"
-                    "위 기억을 참고해 사용자 메시지에 답변하세요.\n"
+                    "memories 목록:\n{memories_text}\n\n"
+                    "원본 memories(JSON): {memories_json}\n\n"
+                    "위 기억을 참고하여 사용자 메시지에 답변하세요.\n"
                     "사용자: {user_message}"
                 )
             ),
@@ -63,6 +64,9 @@ def main() -> None:
         memory_client.add(user_input)
 
         search_results = memory_client.search(user_input, top_k=MEMORY_TOP_K)
+        if not search_results:
+            search_results = memory_client.recent(top_k=MEMORY_TOP_K)
+
         if search_results:
             print("\n[검색된 기억]")
             for idx, item in enumerate(search_results, start=1):
@@ -82,6 +86,7 @@ def main() -> None:
         chain = prompt | llm
         response = chain.invoke({
             "memories_text": memories_text,
+            "memories_json": str(search_results),
             "user_message": user_input,
         })
 
