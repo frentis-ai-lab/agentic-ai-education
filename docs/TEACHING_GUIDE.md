@@ -17,7 +17,7 @@
 | Day 1 Session 1 | MCP 기본 & 예제 실행 | 01, 02 | 90분 | FastMCP 개념, MCP 툴 배포 |
 | Day 1 Session 2 | LangChain & CrewAI | 03, 04 | 90분 | ReAct 패턴, 협업 워크플로우 |
 | Day 2 Session 1 | mem0 메모리 + AutoGen 입문 | 05, 06 | 120분 | 장기 기억과 a2a 구조 |
-| Day 2 Session 2 | 통합 시나리오 구축 | 08, 09 | 120분 | mem0 + MCP + A2A 파이프라인 |
+| Day 2 Session 2 | 통합 시나리오 구축 | 09, 10 | 120분 | mem0 + MCP + A2A 파이프라인 |
 
 > 시간은 참가자 수준에 따라 조정하세요. 라이브 코딩(30%) + 실습(50%) + Q&A(20%) 정도 비중을 추천합니다.
 > 실습 전 루트에서 `.env.example`을 `.env`로 복사해 API 키를 입력하고 `source .env` 해 두면 단계별 환경 변수 안내가 단순화됩니다.
@@ -63,7 +63,12 @@
    - 확인: `search_profile` 호출 로그와 결과를 비교, 이메일 초안 품질 평가
    - 확장 아이디어: `ensure_memories` 대신 실시간 사용자 입력 받기
 
-9. **09_a2a_dual_agents**
+9. **09_a2a_mem0_profile**
+   - 목표: mem0를 툴로 감싼 뒤 a2a 에이전트에게 연결하는 방법 학습
+   - 확인: `search_profile` 호출 로그와 결과를 비교, 이메일 초안 품질 평가
+   - 확장 아이디어: `ensure_memories` 대신 실시간 사용자 입력 받기
+
+10. **10_a2a_dual_agents**
    - 목표: 서로 다른 에이전트 프레임워크(CrewAI vs LangGraph)를 A2A 오케스트레이션으로 연결
    - 확인: 세 서버(두 에이전트 + UI)가 동작하며 브라우저에서 user → crew → writer 흐름이 재생되는지 확인
    - 토론: a2a-sdk 도입, 에이전트 증설, 메시지 라우팅 전략(병렬/조건부) 등 확장 아이디어
@@ -90,6 +95,6 @@
 - 사용자용 안내서는 `docs/USER_MANUAL.md`
 - 실습 기록 템플릿(선택): Google Docs / Notion 템플릿 등 자유롭게 제공
 - 최신 정보 업데이트 시: FastMCP, AutoGen 릴리스 노트를 강의 전에 확인하세요.
-- 세부 학습 노트: `docs/lesson_notes/` 내 9개 문서를 세션 전후로 배포하면 복습에 도움됩니다.
+- 세부 학습 노트: `docs/lesson_notes/` 내 10개 문서를 세션 전후로 배포하면 복습에 도움됩니다.
 
 준비된 자료를 기반으로 학습자의 수준과 목표에 맞춰 커리큘럼을 조정해 주세요. 현장에서 수집한 질문이나 개선 요청을 문서 하단에 추가 기록해 두면 후속 강의 품질이 향상됩니다.

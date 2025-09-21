@@ -3,7 +3,7 @@
 이 문서는 `Agentic AI Education Playground` 리포지터리를 사용하는 학습자를 위한 안내서입니다. 각 단계별 실습을 수행하는 방법, 자격증명 설정, 자주 발생하는 문제 해결 방법을 제공합니다.
 
 ## 1. 전체 개요
-- **구성**: 9개의 단계별 폴더 + 공통 루트 README + 보조 문서
+- **구성**: 10개의 단계별 폴더 + 공통 루트 README + 보조 문서
 - **목적**: FastMCP, LangChain, CrewAI, mem0, AutoGen(a2a) ⽣태계의 핵심 개념을 단계적으로 체험
 - **형식**: 모든 예제는 `uv` 패키지 관리자를 사용하며 최소한의 의존성만 포함
 
@@ -42,9 +42,10 @@ uv run python client.py
 | 04_langchain_mcp | LangChain + MCP 혼합 워크플로우 | `uv run python react_with_mcp.py` | MCP 서버 임베드, 필요 시 별도 실행 |
 | 05_crewai_team | CrewAI 협업 플로우 | `uv run python crew_run.py` | 영업 담당자 입력을 콘솔에서 직접 제공 |
 | 06_mem0_basics | mem0 메모리 CRUD | `uv run python memory_demo.py` | MEM0 API 키 필요 |
-| 07_a2a_basics | AutoGen a2a 기본 | `uv run python basic_chat.py` | GroupChatManager 로깅 관찰 |
-| 08_a2a_mem0_profile | mem0 + a2a | `uv run python personal_agents.py` | `search_profile` 툴 호출 흐름 확인 |
-| 09_a2a_dual_agents | CrewAI & LangGraph A2A 서버 + UI | 각 하위 폴더에서 `uv run uvicorn ...` | 세 개의 프로세스를 띄워 브라우저로 테스트 |
+| 07_mem0_chat_assistant | mem0 장기 기억 챗봇 | `uv run streamlit run app.py` | Streamlit UI, mem0 저장/검색 확인 |
+| 08_a2a_basics | AutoGen a2a 기본 | `uv run python basic_chat.py` | GroupChatManager 로깅 관찰 |
+| 09_a2a_mem0_profile | mem0 + a2a | `uv run python personal_agents.py` | `search_profile` 툴 호출 흐름 확인 |
+| 10_a2a_dual_agents | CrewAI & LangGraph A2A 서버 + UI | 각 하위 폴더에서 `uv run uvicorn ...` | 세 개의 프로세스를 띄워 브라우저로 테스트 |
 
 각 단계의 README는 추가 설정값과 로그 예시를 포함하므로, 실습 전 반드시 읽어 주세요.
 
