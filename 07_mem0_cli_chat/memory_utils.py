@@ -7,6 +7,7 @@ from typing import Any, Dict, List
 from mem0 import MemoryClient
 
 DEFAULT_VERSION = "v1"
+DEFAULT_OUTPUT_FORMAT = "v1.1"
 
 
 class Mem0Memory:
@@ -16,7 +17,11 @@ class Mem0Memory:
 
     def add(self, content: str) -> Dict[str, Any]:
         messages = [{"role": "user", "content": content}]
-        return self.client.add(messages=messages, user_id=self.user_id)
+        return self.client.add(
+            messages=messages,
+            user_id=self.user_id,
+            output_format=DEFAULT_OUTPUT_FORMAT,
+        )
 
     def search(self, query: str, top_k: int = 3) -> List[Dict[str, Any]]:
         return self.client.search(
