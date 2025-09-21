@@ -57,13 +57,6 @@ def render_summary(summary: dict[str, Any] | None, container: st.delta_generator
         container.info("요약이 아직 생성되지 않았습니다.")
         return
 
-    if isinstance(summary, list):
-        summary = summary[0] if summary else {}
-
-    if not isinstance(summary, dict):
-        container.write(summary)
-        return
-
     text = summary.get("summary")
     if text:
         container.markdown(f"**요약**\n\n{text}")
@@ -119,7 +112,7 @@ def main() -> None:
     if st.sidebar.button("새 user_id 발급", use_container_width=True):
         st.session_state.session_id = f"streamlit-{uuid.uuid4().hex[:8]}"
         reset_session_buffers()
-        st.rerun()
+        st.experimental_rerun()
 
     mem = Mem0Memory(client, user_id=st.session_state.session_id)
 
