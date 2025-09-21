@@ -1,4 +1,4 @@
-# 08_a2a_basics – 학습 노트
+# 07_a2a_basics – 학습 노트
 
 ## 학습 목표
 - AutoGen의 Agent-to-Agent(GroupChat) 기본 구조 이해

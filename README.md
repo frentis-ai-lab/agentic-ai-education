@@ -27,10 +27,9 @@ uv run python <script.py>
 4. **04_langchain_mcp** – LangChain ReAct 에이전트가 FastMCP 툴과 로컬 툴을 혼합 활용
 5. **05_crewai_team** – CrewAI로 마케터 → 영업 담당(휴먼) → 메일러 협업 크루 구성
 6. **06_mem0_basics** – mem0로 개인화 메모리를 저장/조회하는 기초
-7. **07_mem0_chat_assistant** – Streamlit 챗봇에서 mem0 장기 기억을 체험
-8. **08_a2a_basics** – AutoGen a2a 스타일로 두 에이전트가 대화하도록 구성
-9. **09_a2a_mem0_profile** – mem0를 활용해 개인정보를 가진 에이전트 구성 및 상호작용
-10. **10_a2a_dual_agents** – CrewAI/ LangGraph 에이전트를 개별 서버로 띄우고 UI에서 A2A 오케스트레이션
+7. **07_a2a_basics** – AutoGen a2a 스타일로 두 에이전트가 대화하도록 구성
+8. **08_a2a_mem0_profile** – mem0를 활용해 개인정보를 가진 에이전트 구성 및 상호작용
+9. **09_a2a_dual_agents** – CrewAI/ LangGraph 에이전트를 개별 서버로 띄우고 UI에서 A2A 오케스트레이션
 
 각 폴더의 README를 참고하여 실습을 진행하고, 필요 시 API 키나 MCP 서버 설정을 개별적으로 구성하세요.
 
