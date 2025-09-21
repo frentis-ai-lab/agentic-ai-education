@@ -49,7 +49,7 @@ def ensure_session_state() -> None:
 def reset_session_buffers() -> None:
     st.session_state.conversation = []
     st.session_state.pop("last_memories", None)
-    st.session_state.latest_summary = None
+    st.session_state.pop("latest_summary", None)
 
 
 def render_summary(summary: dict[str, Any] | None, container: st.delta_generator.DeltaGenerator) -> None:
@@ -97,7 +97,6 @@ def main() -> None:
 
     ensure_session_state()
     client = get_mem0_client()
-
     st.sidebar.header("세션 정보")
     user_id_input = st.sidebar.text_input(
         "user_id",
@@ -123,7 +122,7 @@ def main() -> None:
         st.sidebar.subheader("mem0 요약")
         render_summary(st.session_state.latest_summary, st.sidebar)
 
-    st.sidebar.caption("검색된 기억은 채팅 영역 아래 카드에서 확인할 수 있습니다.")
+    st.sidebar.caption("검색된 기억은 채팅 영역 아래의 카드에서 확인할 수 있습니다.")
 
     llm = get_llm()
     prompt = ChatPromptTemplate.from_messages(
