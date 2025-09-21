@@ -29,7 +29,7 @@
 
 2. **02_fastmcp_package**
    - 목표: MCP 서버를 패키징하고 PyPI(TestPyPI) 배포 후 `fastmcp.json`에 등록하는 과정 이해
-   - 확인: `pip install agentic-hello-mcp`로 설치한 뒤 콘솔에서 `hello-mcp-server`가 동작하는지 검증
+   - 확인: `pip install agentic-hello-mcp` 또는 `pipx run --spec agentic-hello-mcp hello-mcp-server`로 실행이 가능한지 검증
    - 연습: `marketing_update` 툴을 수정하고 버전 올려 재배포 / TestPyPI 업로드 시나리오 실습
 
 3. **03_langchain_react**

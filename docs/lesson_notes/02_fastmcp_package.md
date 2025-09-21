@@ -11,8 +11,8 @@
    - `pyproject.toml`의 배포명은 `agentic-hello-mcp`, `project.scripts`에 `hello-mcp-server` 콘솔 엔트리 등록
 2. **배포 흐름**
    - `uv build`로 wheel 생성 → `uvx twine upload --repository testpypi dist/*`
-   - 소비자는 `pip install --extra-index-url https://test.pypi.org/simple agentic-hello-mcp`로 설치
-   - 설치 시 `hello-mcp-server` 콘솔 스크립트가 PATH에 등록되어 MCP 클라이언트가 호출 가능
+   - 소비자는 `pip install --extra-index-url https://test.pypi.org/simple agentic-hello-mcp` 또는 `pipx run --spec agentic-hello-mcp hello-mcp-server`로 실행
+   - 설치 또는 1회 실행 후에는 `hello-mcp-server` 콘솔 스크립트로 MCP 클라이언트가 호출 가능
 3. **fastmcp.json**
    - MCP 호환 클라이언트가 읽을 수 있는 설정 파일
    - `type=stdio`, `command=hello-mcp-server` → 설치된 패키지에서 서버를 실행
@@ -22,7 +22,7 @@
 ## 실행 & 관찰 포인트
 - `uv build` → wheel 생성 과정을 확인 (패키징 흐름 체험)
 - `uv pip install --editable .` → 개발 모드 설치 후 `uv run hello-mcp-server`
-- TestPyPI에 업로드 후 `pip install --extra-index-url … agentic-hello-mcp` 흐름 검증
+- TestPyPI에 업로드 후 `pip install --extra-index-url … agentic-hello-mcp` 또는 `pipx run --spec agentic-hello-mcp hello-mcp-server` 흐름 검증
 - `fastmcp.json`을 실제 클라이언트 설정에 복사해 활용
 
 ## 심화 질문
