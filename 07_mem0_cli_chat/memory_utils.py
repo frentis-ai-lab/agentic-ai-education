@@ -6,7 +6,7 @@ from typing import Any, Dict, List
 
 from mem0 import MemoryClient
 
-DEFAULT_VERSION = "v1.1"
+DEFAULT_VERSION = "v1"
 DEFAULT_OUTPUT_FORMAT = "v1.1"
 
 

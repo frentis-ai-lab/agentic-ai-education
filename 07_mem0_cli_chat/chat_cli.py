@@ -63,7 +63,12 @@ def main() -> None:
         conversation.append({"role": "user", "content": user_input})
         memory_client.add(user_input)
 
-        search_results = memory_client.search(user_input, top_k=MEMORY_TOP_K)
+        try:
+            search_results = memory_client.search(user_input, top_k=MEMORY_TOP_K)
+        except Exception as exc:
+            print(f"\n[경고] 검색 중 오류 발생: {exc}")
+            search_results = []
+
         if not search_results:
             search_results = memory_client.recent(top_k=MEMORY_TOP_K)
 
