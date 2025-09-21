@@ -52,6 +52,7 @@ uv run python client.py
 - **패키지 설치 문제**: `uv pip cache purge`로 캐시를 제거하고 다시 `uv sync`를 수행합니다.
 - **MCP 실행 오류**: FastMCP 서버 스크립트가 `app.run()`을 호출하는지, `command` 이름이 정확한지 검토하세요.
 - **AutoGen에서 무한 루프**: `max_round` 값을 조정하거나, UserProxyAgent에 직접 개입(`human_input_mode="ALWAYS"`)할 수 있습니다.
+- **`hello-mcp-server`를 찾지 못함(ENOENT)**: `pipx run`/`uv tool run`처럼 직접 실행하거나, `which hello-mcp-server`로 확인한 절대 경로를 `fastmcp.json`의 `command`에 지정합니다. 필요하면 `/usr/local/bin` 등에 심볼릭 링크를 추가하세요.
 
 ## 6. 학습 팁
 - 각 단계의 로그를 그대로 복사해 강의 자료(슬라이드/노션)에 붙여 넣으면 데모 재현이 쉽습니다.
