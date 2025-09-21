@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 import os
 import uuid
 from typing import Any, List, Sequence
@@ -21,7 +20,10 @@ load_dotenv()
 st.set_page_config(page_title="mem0 장기 기억 챗봇", layout="wide")
 
 OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
-DEFAULT_QUERY = "사용자가 알려준 사실을 기반으로 친근하게 답변하십시오."
+DEFAULT_QUERY = (
+    "너는 사용자의 장기 기억(mem0)과 최신 메시지를 모두 참고하는 비서야. "
+    "기억 목록에 포함된 사실을 가능한 한 답변에 반영하고, 기억이 없다면 정중히 모른다고 말해."
+)
 
 
 @st.cache_resource(show_spinner=False)
@@ -136,7 +138,13 @@ def main() -> None:
     prompt = ChatPromptTemplate.from_messages(
         [
             SystemMessage(content=DEFAULT_QUERY),
-            HumanMessage(content="Memories: {memories}\n\nUser: {user_message}"),
+            HumanMessage(
+                content=(
+                    "참고할 기억 목록:\n{memory_text}\n\n"
+                    "위 기억을 참고하여 아래 사용자 메시지에 답변하세요.\n"
+                    "사용자: {user_message}"
+                )
+            ),
         ]
     )
 
@@ -146,10 +154,15 @@ def main() -> None:
         mem.add_message(user_input)
 
         search_results = mem.search(user_input, top_k=3)
-        memories_text = json.dumps(search_results, ensure_ascii=False)
+
+        if search_results:
+            memory_lines = [f"- {item.get('memory', '')}" for item in search_results]
+            memory_text = "\n".join(memory_lines)
+        else:
+            memory_text = "(관련 기억 없음)"
 
         chain = prompt | llm
-        response = chain.invoke({"memories": memories_text, "user_message": user_input})
+        response = chain.invoke({"memory_text": memory_text, "user_message": user_input})
         st.session_state.conversation.append({"role": "assistant", "content": response.content})
 
         st.session_state.last_memories = search_results
