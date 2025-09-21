@@ -36,7 +36,7 @@ uv run python client.py
 | 단계 | 주제 | 핵심 명령 | 비고 |
 | --- | --- | --- | --- |
 | 01_fastmcp_tool | FastMCP 툴/클라이언트 기초 | `uv run python server.py` / `uv run python client.py` | 단일 프로세스 테스트 포함 |
-| 02_fastmcp_package | FastMCP 서버 패키징 | `uv build`, `uv pip install --editable .`, `uv run hello-mcp-server` | `fastmcp.json` 예시 제공 |
+| 02_fastmcp_package | FastMCP 서버 패키징 & PyPI 배포 | `uv build`, `uvx twine upload`, `pip install agentic-hello-mcp` | `fastmcp.json` 예시 제공 |
 | 03_langchain_react | LangChain ReAct 패턴 | `uv run python react_agent.py` | OpenAI API 키 필요 |
 | 04_crewai_team | CrewAI 협업 플로우 | `uv run python crew_run.py` | 영업 담당자 입력을 콘솔에서 직접 제공 |
 | 05_mem0_basics | mem0 메모리 CRUD | `uv run python memory_demo.py` | MEM0 API 키 필요 |

@@ -1,5 +1,5 @@
 [project]
-name = "hello-mcp"
+name = "agentic-hello-mcp"
 version = "0.1.0"
 description = "Packaged FastMCP server with uv and fastmcp.json registration"
 readme = "README.md"

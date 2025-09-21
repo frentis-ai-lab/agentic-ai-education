@@ -28,9 +28,9 @@
    - 확장 질문: "추가 도구를 만들어보자면 어떤 데이터가 필요할까요?"
 
 2. **02_fastmcp_package**
-   - 목표: MCP 서버를 패키징하고 `fastmcp.json`에 등록하는 과정 이해
-   - 확인: `uv run hello-mcp-server` 실행 및 `demo_client.py` 정상 응답
-   - 연습: `marketing_update` 툴을 수정하여 다른 시나리오로 확장
+   - 목표: MCP 서버를 패키징하고 PyPI(TestPyPI) 배포 후 `fastmcp.json`에 등록하는 과정 이해
+   - 확인: `pip install agentic-hello-mcp`로 설치한 뒤 콘솔에서 `hello-mcp-server`가 동작하는지 검증
+   - 연습: `marketing_update` 툴을 수정하고 버전 올려 재배포 / TestPyPI 업로드 시나리오 실습
 
 3. **03_langchain_react**
    - 목표: ReAct 루프 구조 파악 및 커스텀 툴 연결

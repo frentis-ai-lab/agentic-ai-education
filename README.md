@@ -16,7 +16,7 @@ uv run python <script.py>
 
 ## 단계 요약
 1. **01_fastmcp_tool** – FastMCP로 간단한 MCP 서버/툴 만들기와 클라이언트 테스트
-2. **02_fastmcp_package** – FastMCP 서버를 패키징하고 `fastmcp.json`으로 등록해 보기
+2. **02_fastmcp_package** – FastMCP 서버를 패키징하고 PyPI를 통해 배포/등록해 보기
 3. **03_langchain_react** – LangChain ReAct 패턴으로 도구 사용 테스트
 4. **04_crewai_team** – CrewAI로 마케터 → 영업 담당(휴먼) → 메일러 협업 크루 구성
 5. **05_mem0_basics** – mem0로 개인화 메모리를 저장/조회하는 기초

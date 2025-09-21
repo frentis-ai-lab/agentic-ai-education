@@ -1,2 +1,0 @@
-[console_scripts]
-hello-mcp-server = hello_mcp.server:main
