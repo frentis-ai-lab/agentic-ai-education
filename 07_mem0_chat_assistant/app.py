@@ -143,9 +143,8 @@ def main() -> None:
             SystemMessage(content=DEFAULT_QUERY),
             HumanMessage(
                 content=(
-                    "참고할 기억 요약:\n{memories_text}\n\n"
-                    "원본 memories(JSON): {memories_json}\n\n"
-                    "위 기억을 참고하여 사용자 메시지에 답변하세요.\n"
+                    "memories (JSON): {memories_json}\n\n"
+                    "위 memories를 참고하여 사용자 메시지에 답변하세요.\n"
                     "사용자: {user_message}"
                 )
             ),
@@ -159,17 +158,8 @@ def main() -> None:
 
         search_results = mem.search(user_input, top_k=3)
 
-        if search_results:
-            memory_lines = [
-                f"- {item.get('memory', '')}" for item in search_results if item.get("memory")
-            ]
-            memory_text = "\n".join(memory_lines)
-        else:
-            memory_text = "(관련 기억 없음)"
-
         chain = prompt | llm
         response = chain.invoke({
-            "memories_text": memory_text,
             "memories_json": json.dumps(search_results, ensure_ascii=False),
             "user_message": user_input,
         })
