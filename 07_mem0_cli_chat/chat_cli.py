@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 from typing import List
 
@@ -70,7 +71,11 @@ def main() -> None:
             search_results = []
 
         if not search_results:
-            search_results = memory_client.recent(top_k=MEMORY_TOP_K)
+            try:
+                search_results = memory_client.recent(top_k=MEMORY_TOP_K)
+            except Exception as exc:
+                print(f"[경고] 최근 기억 조회 중 오류 발생: {exc}")
+                search_results = []
 
         if search_results:
             print("\n[검색된 기억]")
@@ -91,7 +96,7 @@ def main() -> None:
         chain = prompt | llm
         response = chain.invoke({
             "memories_text": memories_text,
-            "memories_json": str(search_results),
+            "memories_json": json.dumps(search_results, ensure_ascii=False),
             "user_message": user_input,
         })
 
