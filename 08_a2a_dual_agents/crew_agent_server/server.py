@@ -6,6 +6,7 @@ import os
 from typing import Any
 
 from crewai import Agent, Crew, Process, Task
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
@@ -29,6 +30,9 @@ class A2AResponse(BaseModel):
     reply: str
     agent: str = APP_NAME
     meta: dict[str, Any] = Field(default_factory=dict)
+
+
+load_dotenv()
 
 
 def build_agent() -> Agent:

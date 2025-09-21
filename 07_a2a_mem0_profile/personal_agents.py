@@ -7,6 +7,7 @@ import os
 from typing import Annotated
 
 from autogen import AssistantAgent, GroupChat, GroupChatManager, UserProxyAgent
+from dotenv import load_dotenv
 from mem0 import MemoryClient
 
 USER_ID = "lecture-student"
@@ -40,6 +41,8 @@ def build_llm_config() -> dict:
 
 
 def main() -> None:
+    load_dotenv()
+
     mem0_key = os.getenv("MEM0_API_KEY")
     if not mem0_key:
         raise RuntimeError("MEM0_API_KEY 환경 변수를 설정해 주세요 (https://docs.mem0.ai).")

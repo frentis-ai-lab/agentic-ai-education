@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import os
+
+from dotenv import load_dotenv
 from autogen import AssistantAgent, GroupChat, GroupChatManager, UserProxyAgent
 
 
@@ -23,6 +25,8 @@ def build_llm_config() -> dict:
 
 
 def main() -> None:
+    load_dotenv()
+
     llm_config = build_llm_config()
 
     planner = AssistantAgent(

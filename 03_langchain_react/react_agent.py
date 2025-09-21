@@ -1,9 +1,14 @@
 """LangChain ReAct agent that consults simple marketing helper tools."""
 
 import os
+
+from dotenv import load_dotenv
 from langchain.agents import AgentType, initialize_agent
 from langchain.tools import Tool
 from langchain_openai import ChatOpenAI
+
+load_dotenv()
+
 
 PRODUCT_SNAPSHOTS: dict[str, str] = {
     "에이전틱 교육": "AI 에이전트 빌딩 기초와 실습을 묶은 4주 프로그램",

@@ -9,6 +9,7 @@ dependencies = [
   "uvicorn[standard]>=0.30",
   "crewai>=0.193.0",
   "langchain-openai>=0.1.17",
+  "python-dotenv>=1.0",
 ]
 
 [tool.uv]

@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 from typing import Any, Annotated, TypedDict
 
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from langchain_core.messages import BaseMessage, HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
@@ -39,6 +40,9 @@ class A2AResponse(BaseModel):
     reply: str
     agent: str = APP_NAME
     meta: dict[str, Any] = Field(default_factory=dict)
+
+
+load_dotenv()
 
 
 def build_graph() -> StateGraph:

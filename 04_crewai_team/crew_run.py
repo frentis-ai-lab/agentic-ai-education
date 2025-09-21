@@ -4,7 +4,12 @@ from __future__ import annotations
 
 import argparse
 import os
+
+from dotenv import load_dotenv
 from crewai import Agent, Crew, Process, Task
+
+
+load_dotenv()
 
 
 def build_agents(model_name: str) -> tuple[Agent, Agent, Agent]:

@@ -6,10 +6,13 @@ import uuid
 from typing import Any
 
 import httpx
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel, Field
+
+load_dotenv()
 
 CREW_AGENT_URL = os.getenv("CREW_AGENT_URL", "http://localhost:8001")
 LANGGRAPH_AGENT_URL = os.getenv("LANGGRAPH_AGENT_URL", "http://localhost:8002")
