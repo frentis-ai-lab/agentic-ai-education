@@ -1,4 +1,4 @@
-# 08_a2a_dual_agents
+# 09_a2a_dual_agents
 
 두 개의 독립 에이전트 서버(CrewAI, LangGraph)와 이를 조율하는 오케스트레이션 UI 서버를 통해 A2A(Agent-to-Agent) 패턴을 실습합니다. 구조는 [A2A 프로젝트](https://github.com/a2aproject/A2A)에서 소개하는 프로토콜을 간소화해 학습용으로 구성했습니다.
 

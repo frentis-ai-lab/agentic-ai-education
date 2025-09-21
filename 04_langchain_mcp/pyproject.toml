@@ -1,0 +1,15 @@
+[project]
+name = "langchain-mcp-demo"
+version = "0.1.0"
+description = "LangChain ReAct agent using local tools and FastMCP integration"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "langchain>=0.3.0",
+  "langchain-openai>=0.1.17",
+  "fastmcp>=2.12,<3.0",
+  "python-dotenv>=1.0",
+]
+
+[tool.uv]
+package = false

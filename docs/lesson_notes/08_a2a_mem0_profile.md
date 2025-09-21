@@ -1,4 +1,4 @@
-# 07_a2a_mem0_profile – 학습 노트
+# 08_a2a_mem0_profile – 학습 노트
 
 ## 학습 목표
 - AutoGen 에이전트에 외부 기억(mem0) 조회 툴을 연결하는 방법 이해

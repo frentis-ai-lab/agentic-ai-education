@@ -17,7 +17,7 @@
 | Day 1 Session 1 | MCP 기본 & 예제 실행 | 01, 02 | 90분 | FastMCP 개념, MCP 툴 배포 |
 | Day 1 Session 2 | LangChain & CrewAI | 03, 04 | 90분 | ReAct 패턴, 협업 워크플로우 |
 | Day 2 Session 1 | mem0 메모리 + AutoGen 입문 | 05, 06 | 120분 | 장기 기억과 a2a 구조 |
-| Day 2 Session 2 | 통합 시나리오 구축 | 07, 08 | 120분 | mem0 + MCP + A2A 파이프라인 |
+| Day 2 Session 2 | 통합 시나리오 구축 | 08, 09 | 120분 | mem0 + MCP + A2A 파이프라인 |
 
 > 시간은 참가자 수준에 따라 조정하세요. 라이브 코딩(30%) + 실습(50%) + Q&A(20%) 정도 비중을 추천합니다.
 > 실습 전 루트에서 `.env.example`을 `.env`로 복사해 API 키를 입력하고 `source .env` 해 두면 단계별 환경 변수 안내가 단순화됩니다.
@@ -38,27 +38,32 @@
    - 확인: Thought/Action/Observation 로그 분석, 결과 품질 평가
    - 토론: "ReAct 패턴과 MCP 툴을 어떻게 결합할 수 있을까?"
 
-4. **04_crewai_team**
+4. **04_langchain_mcp**
+   - 목표: LangChain 에이전트가 MCP 툴과 로컬 툴을 혼합해 사용하는 흐름 이해
+   - 확인: 로그에서 MCP 툴 호출이 수행되고 structured content를 응답에 반영하는지 확인
+   - 연습: MCP 서버에 새로운 툴을 추가하고 에이전트 브리징 함수를 수정해 보기
+
+5. **05_crewai_team**
    - 목표: CrewAI 에이전트/태스크 모델 이해, `human_input=True` 체험
    - 확인: 영업 담당자 피드백 입력 후 이메일이 어떻게 달라지는지 관찰
    - 연습: 새로운 역할(예: Legal Reviewer) 추가해보기
 
-5. **05_mem0_basics**
+6. **06_mem0_basics**
    - 목표: mem0 API로 개인 정보 저장/검색/요약 흐름 이해
    - 확인: `client.search` 결과가 기대와 일치하는지 비교
    - 토론: "mem0 데이터를 갱신하거나 삭제할 때 주의할 점은?"
 
-6. **06_a2a_basics**
+7. **07_a2a_basics**
    - 목표: AutoGen GroupChatManager 기본 구조 이해
    - 확인: `planner`와 `writer` 간 메시지 흐름 파악
    - 연습: `reviewer`를 `ALWAYS` 모드로 전환해 직접 개입해 보기
 
-7. **07_a2a_mem0_profile**
+8. **08_a2a_mem0_profile**
    - 목표: mem0를 툴로 감싼 뒤 a2a 에이전트에게 연결하는 방법 학습
    - 확인: `search_profile` 호출 로그와 결과를 비교, 이메일 초안 품질 평가
    - 확장 아이디어: `ensure_memories` 대신 실시간 사용자 입력 받기
 
-8. **08_a2a_dual_agents**
+9. **09_a2a_dual_agents**
    - 목표: 서로 다른 에이전트 프레임워크(CrewAI vs LangGraph)를 A2A 오케스트레이션으로 연결
    - 확인: 세 서버(두 에이전트 + UI)가 동작하며 브라우저에서 user → crew → writer 흐름이 재생되는지 확인
    - 토론: a2a-sdk 도입, 에이전트 증설, 메시지 라우팅 전략(병렬/조건부) 등 확장 아이디어
@@ -74,7 +79,7 @@
 - CrewAI 워크플로우에 휴먼 검토 단계를 추가하면 어떤 장단점이 생길까요?
 - mem0와 벡터 DB의 역할 차이점은 무엇이며, 동시에 사용할 때의 전략은?
 - AutoGen a2a 에이전트가 실패했을 때 롤백하거나 재시도하는 패턴을 설계해 보세요.
-- `08_a2a_dual_agents`를 확장해 Slack, Notion MCP 툴과 연계하는 시나리오를 구상해 보세요.
+- `09_a2a_dual_agents`를 확장해 Slack, Notion MCP 툴과 연계하는 시나리오를 구상해 보세요.
 
 ## 6. 평가 및 인증 제안
 - **미니 프로젝트**: 참가자가 자율적으로 선택한 API 또는 사내 데이터를 MCP 툴로 감싸고, LangChain 또는 AutoGen을 사용해 자동화를 구성하도록 요구
@@ -85,6 +90,6 @@
 - 사용자용 안내서는 `docs/USER_MANUAL.md`
 - 실습 기록 템플릿(선택): Google Docs / Notion 템플릿 등 자유롭게 제공
 - 최신 정보 업데이트 시: FastMCP, AutoGen 릴리스 노트를 강의 전에 확인하세요.
-- 세부 학습 노트: `docs/lesson_notes/` 내 8개 문서를 세션 전후로 배포하면 복습에 도움됩니다.
+- 세부 학습 노트: `docs/lesson_notes/` 내 9개 문서를 세션 전후로 배포하면 복습에 도움됩니다.
 
 준비된 자료를 기반으로 학습자의 수준과 목표에 맞춰 커리큘럼을 조정해 주세요. 현장에서 수집한 질문이나 개선 요청을 문서 하단에 추가 기록해 두면 후속 강의 품질이 향상됩니다.

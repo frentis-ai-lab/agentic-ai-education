@@ -1,4 +1,4 @@
-# 06_a2a_basics
+# 07_a2a_basics
 
 AutoGen(`pyautogen`)으로 에이전트-투-에이전트(a2a) 대화를 구성하는 기본 예제입니다.
 

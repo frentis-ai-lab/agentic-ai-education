@@ -1,4 +1,4 @@
-# 07_a2a_mem0_profile
+# 08_a2a_mem0_profile
 
 mem0에 저장된 개인정보를 활용하는 AutoGen a2a 에이전트 예제입니다.
 

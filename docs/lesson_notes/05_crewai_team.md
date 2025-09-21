@@ -1,4 +1,4 @@
-# 04_crewai_team – 학습 노트
+# 05_crewai_team – 학습 노트
 
 ## 학습 목표
 - CrewAI의 핵심 구성요소(Agent, Task, Crew)와 sequential 프로세스 이해
