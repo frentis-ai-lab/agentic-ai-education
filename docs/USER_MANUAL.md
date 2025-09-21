@@ -21,6 +21,7 @@ export OPENAI_API_KEY=sk-...
 export MEM0_API_KEY=mem0_...
 export OPENAI_MODEL=gpt-4o-mini  # (선택)
 ```
+> 루트 디렉터리의 `.env.example`을 복사해 `.env`를 만들고 `source .env`로 불러오는 방식이 가장 간편합니다.
 
 ## 3. 공통 실행 흐름
 각 단계 폴더에 진입한 뒤 아래 순서로 진행합니다.

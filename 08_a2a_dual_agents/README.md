@@ -11,6 +11,16 @@
 
 각 폴더는 독립적인 `pyproject.toml`과 `uv` 환경을 사용합니다.
 
+## 환경 변수 준비
+1. 루트 `.env`에 `OPENAI_API_KEY`(필수), 필요 시 `OPENAI_MODEL`을 지정하고 `source .env` (권장)
+2. LangGraph/LangChain 에이전트가 같은 키를 공유하므로 두 서버 모두 동일한 환경 변수를 읽습니다.
+
+```bash
+# .env를 사용하지 않는 경우 예시
+export OPENAI_API_KEY=sk-...
+uv sync
+```
+
 ## 전체 실행 순서
 1. **Crew 에이전트 서버 실행**
    ```bash

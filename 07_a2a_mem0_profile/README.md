@@ -3,7 +3,11 @@
 mem0에 저장된 개인정보를 활용하는 AutoGen a2a 에이전트 예제입니다.
 
 ## 1. 환경 변수 설정
+1. 루트 `.env`에 `OPENAI_API_KEY`, `MEM0_API_KEY`를 지정하고 `source .env` (권장)
+2. 이 디렉터리에서 의존성을 설치합니다.
+
 ```bash
+# .env를 사용하지 않는 경우 직접 설정
 export OPENAI_API_KEY=sk-...
 export MEM0_API_KEY=mem0_xxx
 uv sync

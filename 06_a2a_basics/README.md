@@ -3,7 +3,11 @@
 AutoGen(`pyautogen`)으로 에이전트-투-에이전트(a2a) 대화를 구성하는 기본 예제입니다.
 
 ## 1. 준비
+1. 루트 `.env`에서 OPENAI_API_KEY를 설정하고 `source .env` (권장)
+2. 이 디렉터리에서 의존성을 설치합니다.
+
 ```bash
+# .env를 사용하지 않는 경우 직접 설정
 export OPENAI_API_KEY=sk-...
 uv sync
 ```

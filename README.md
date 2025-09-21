@@ -7,6 +7,12 @@
 - [uv](https://github.com/astral-sh/uv) 0.8 이상
 - (필요 시) OpenAI API Key, Anthropic API Key 등 LLM 공급자 자격증명
 
+처음 사용할 때 루트 디렉터리에 있는 `.env.example`을 복사해 API 키를 채워 두면 편리합니다.
+
+```bash
+cp .env.example .env  # 값 편집 후 `source .env`
+```
+
 각 단계로 이동한 뒤 아래 명령으로 의존성을 설치하고 예제를 실행하세요.
 
 ```bash

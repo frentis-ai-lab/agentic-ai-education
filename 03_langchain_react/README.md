@@ -3,7 +3,11 @@
 LangChain의 ReAct 에이전트 패턴으로 간단한 마케팅 씬을 시뮬레이션합니다.
 
 ## 1. 환경 준비
+1. 루트에서 `.env.example`을 `.env`로 복사하고 값을 채운 뒤 `source .env` (권장)
+2. 이 디렉터리로 이동하여 의존성을 설치합니다.
+
 ```bash
+# .env를 사용하지 않는 경우 아래처럼 직접 설정
 export OPENAI_API_KEY=sk-...
 uv sync
 ```
