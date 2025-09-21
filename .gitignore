@@ -1,0 +1,14 @@
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Virtual environments / uv artifacts
+.venv/
+.uv/
+
+# OS artifacts
+.DS_Store
+
+# Local config / secrets
+.env
+*.env

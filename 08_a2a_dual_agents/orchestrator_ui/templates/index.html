@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>A2A Orchestrator Demo</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; }
+    #log { border: 1px solid #999; padding: 1rem; height: 320px; overflow-y: auto; }
+    .msg { margin-bottom: 0.8rem; }
+    .sender { font-weight: bold; }
+    textarea { width: 100%; height: 80px; }
+    button { padding: 0.6rem 1rem; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>A2A Orchestrator</h1>
+  <p>이 페이지는 CrewAI 기반 전략가 에이전트와 LangGraph 기반 카피라이터 에이전트를 순차 호출하는 데모입니다.</p>
+  <div id="status">세션 초기화 중...</div>
+  <div id="log"></div>
+  <form id="chat-form">
+    <textarea id="message" placeholder="메시지를 입력하세요"></textarea>
+    <button type="submit">전송</button>
+  </form>
+
+  <script>
+    let conversationId = null;
+
+    async function startSession() {
+      const res = await fetch('/api/start', { method: 'POST' });
+      const data = await res.json();
+      conversationId = data.conversation_id;
+      document.getElementById('status').innerText = `세션 ID: ${conversationId}`;
+      document.getElementById('log').innerHTML = '';
+    }
+
+    function appendMessage(sender, message) {
+      const container = document.createElement('div');
+      container.className = 'msg';
+      container.innerHTML = `<span class="sender">${sender}:</span> ${message.replace(/\n/g, '<br/>')}`;
+      document.getElementById('log').appendChild(container);
+      container.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+
+    document.getElementById('chat-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const messageEl = document.getElementById('message');
+      const message = messageEl.value.trim();
+      if (!message || !conversationId) return;
+
+      messageEl.value = '';
+      appendMessage('user', message);
+
+      const res = await fetch('/api/step', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ conversation_id: conversationId, message })
+      });
+
+      if (!res.ok) {
+        appendMessage('system', `에러: ${res.statusText}`);
+        return;
+      }
+
+      const data = await res.json();
+      const history = data.history;
+      const latest = history.slice(-2); // crew, writer
+      latest.forEach(entry => appendMessage(entry.sender, entry.message));
+    });
+
+    startSession();
+  </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+[project]
+name = "hello-mcp"
+version = "0.1.0"
+description = "Packaged FastMCP server with uv and fastmcp.json registration"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastmcp>=2.12,<3.0",
+]
+
+[project.scripts]
+hello-mcp-server = "hello_mcp.server:main"
+
+[tool.uv]
+package = true

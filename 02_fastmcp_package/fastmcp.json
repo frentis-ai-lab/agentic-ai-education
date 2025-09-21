@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "hello-mcp": {
+      "type": "stdio",
+      "command": "hello-mcp-server",
+      "description": "Packaged FastMCP demo server"
+    }
+  }
+}

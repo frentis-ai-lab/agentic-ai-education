@@ -1,0 +1,13 @@
+[project]
+name = "crewai-team-demo"
+version = "0.1.0"
+description = "CrewAI collaborative marketing-to-email workflow"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "crewai>=0.193.0",
+  "langchain-openai>=0.1.17",
+]
+
+[tool.uv]
+package = false

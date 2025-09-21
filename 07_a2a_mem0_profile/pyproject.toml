@@ -1,0 +1,13 @@
+[project]
+name = "a2a-mem0-profile"
+version = "0.1.0"
+description = "AutoGen a2a chat where one agent uses mem0 personal memories"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "autogen>=0.9.9",
+  "mem0ai>=0.1.110",
+]
+
+[tool.uv]
+package = false
