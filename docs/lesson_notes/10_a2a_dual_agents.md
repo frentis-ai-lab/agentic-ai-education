@@ -1,4 +1,4 @@
-# 09_a2a_dual_agents – 학습 노트
+# 10_a2a_dual_agents – 학습 노트
 
 ## 학습 목표
 - 서로 다른 프레임워크(CrewAI, LangGraph)로 작성된 에이전트를 A2A 프로토콜로 연동하는 방법 이해
