@@ -61,7 +61,7 @@ def run_demo() -> None:
     agent = initialize_agent(
         tools,
         llm,
-        agent=AgentType.REACT_DESCRIPTION,
+        agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
         verbose=True,
         handle_parsing_errors=True,
     )
