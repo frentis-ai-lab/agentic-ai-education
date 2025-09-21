@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import os
 import uuid
-from typing import List
+from typing import Any, List, Sequence
 
 import streamlit as st
 from dotenv import load_dotenv
@@ -42,19 +42,53 @@ def ensure_session_state() -> None:
         st.session_state.session_id = f"streamlit-{uuid.uuid4().hex[:8]}"
     if "conversation" not in st.session_state:
         st.session_state.conversation: List[dict[str, str]] = []
+    if "latest_summary" not in st.session_state:
+        st.session_state.latest_summary = None
 
 
-def render_sidebar(mem_client: Mem0Memory) -> None:
-    st.sidebar.header("세션 정보")
-    st.sidebar.write(f"**user_id**: `{mem_client.user_id}`")
+def reset_session_buffers() -> None:
+    st.session_state.conversation = []
+    st.session_state.pop("last_memories", None)
+    st.session_state.pop("latest_summary", None)
 
-    if st.sidebar.button("요약 보기", use_container_width=True):
-        summary = mem_client.get_summary()
-        st.sidebar.subheader("mem0 Summary")
-        st.sidebar.code(json.dumps(summary, ensure_ascii=False, indent=2))
 
-    st.sidebar.write("---")
-    st.sidebar.write("검색된 기억은 채팅 아래쪽에 함께 표시됩니다.")
+def render_summary(summary: dict[str, Any] | None, container: st.delta_generator.DeltaGenerator) -> None:
+    if not summary:
+        container.info("요약이 아직 생성되지 않았습니다.")
+        return
+
+    text = summary.get("summary")
+    if text:
+        container.markdown(f"**요약**\n\n{text}")
+
+    memories = summary.get("memories") or []
+    if memories:
+        container.markdown("최근 기억:")
+        for item in memories:
+            memory_text = item.get("memory")
+            if memory_text:
+                container.markdown(f"- {memory_text}")
+
+
+def render_memories(results: Sequence[dict[str, Any]]) -> None:
+    if not results:
+        st.info("저장된 기억이 아직 없습니다.")
+        return
+
+    for item in results:
+        memory_text = item.get("memory", "(내용 없음)")
+        score = item.get("score")
+        created_at = item.get("created_at")
+
+        with st.container(border=True):
+            st.markdown(f"**{memory_text}**")
+            meta_parts = []
+            if created_at:
+                meta_parts.append(created_at.replace("T", " ")[:19])
+            if score is not None:
+                meta_parts.append(f"score {score:.2f}")
+            if meta_parts:
+                st.caption(" · ".join(meta_parts))
 
 
 def main() -> None:
@@ -63,8 +97,32 @@ def main() -> None:
 
     ensure_session_state()
     client = get_mem0_client()
+    st.sidebar.header("세션 정보")
+    user_id_input = st.sidebar.text_input(
+        "user_id",
+        value=st.session_state.session_id,
+        help="새 user_id를 입력하면 해당 대화 기록이 초기화됩니다.",
+    )
+    sanitized_user_id = user_id_input.strip() or st.session_state.session_id
+    if sanitized_user_id != st.session_state.session_id:
+        st.session_state.session_id = sanitized_user_id
+        reset_session_buffers()
+
+    if st.sidebar.button("새 user_id 발급", use_container_width=True):
+        st.session_state.session_id = f"streamlit-{uuid.uuid4().hex[:8]}"
+        reset_session_buffers()
+        st.experimental_rerun()
+
     mem = Mem0Memory(client, user_id=st.session_state.session_id)
-    render_sidebar(mem)
+
+    if st.sidebar.button("요약 보기", use_container_width=True):
+        st.session_state.latest_summary = mem.get_summary()
+
+    if st.session_state.latest_summary:
+        st.sidebar.subheader("mem0 요약")
+        render_summary(st.session_state.latest_summary, st.sidebar)
+
+    st.sidebar.caption("검색된 기억은 채팅 영역 아래의 카드에서 확인할 수 있습니다.")
 
     llm = get_llm()
     prompt = ChatPromptTemplate.from_messages(
@@ -95,7 +153,7 @@ def main() -> None:
     if "last_memories" in st.session_state:
         st.write("---")
         st.subheader("검색된 기억")
-        st.code(json.dumps(st.session_state.last_memories, ensure_ascii=False, indent=2))
+        render_memories(st.session_state.last_memories)
 
 
 if __name__ == "__main__":
