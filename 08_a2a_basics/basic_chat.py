@@ -28,6 +28,7 @@ def main() -> None:
     load_dotenv()
 
     llm_config = build_llm_config()
+    code_execution_config = {"use_docker": False}
 
     planner = AssistantAgent(
         name="planner",
@@ -36,6 +37,7 @@ def main() -> None:
             "너는 프로젝트 플래너야. 요청을 분석해서 필요한 단계들을 정의하고, "
             "각 단계에 대해 작가 에이전트에게 넘길 지시문을 작성해."
         ),
+        code_execution_config=code_execution_config,
     )
 
     writer = AssistantAgent(
@@ -45,6 +47,7 @@ def main() -> None:
             "너는 이메일 카피라이터야. planner가 준 지시문을 바탕으로, "
             "3단락 이내의 이메일을 작성하고 받은 피드백을 반영해."
         ),
+        code_execution_config=code_execution_config,
     )
 
     reviewer = UserProxyAgent(
@@ -55,6 +58,7 @@ def main() -> None:
         ),
         description="최종 결과를 확인하는 자동화된 리뷰어",
         llm_config=llm_config,
+        code_execution_config=code_execution_config,
     )
 
     group = GroupChat(
