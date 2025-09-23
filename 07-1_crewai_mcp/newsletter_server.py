@@ -42,7 +42,11 @@ def send_email(to: str, subject: str, body: str) -> str:
         msg['To'] = to
         msg['Subject'] = subject
 
-        msg.attach(MIMEText(body, 'plain', 'utf-8'))
+        # HTML 콘텐츠인지 확인하여 적절한 MIME 타입 설정
+        if body.strip().startswith('<!DOCTYPE html>') or '<html>' in body.lower():
+            msg.attach(MIMEText(body, 'html', 'utf-8'))
+        else:
+            msg.attach(MIMEText(body, 'plain', 'utf-8'))
 
         with smtplib.SMTP('smtp.gmail.com', 587) as server:
             server.starttls()
