@@ -1,4 +1,4 @@
-# 03_langchain_react – 학습 노트
+# 01_langchain_react – 학습 노트
 
 ## 학습 목표
 - LangChain의 ReAct(Reasoning + Acting) 에이전트 패턴 이해

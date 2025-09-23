@@ -23,40 +23,40 @@
 > 실습 전 루트에서 `.env.example`을 `.env`로 복사해 API 키를 입력하고 `source .env` 해 두면 단계별 환경 변수 안내가 단순화됩니다.
 
 ## 3. 단계별 학습 목표 & 체크리스트
-1. **01_fastmcp_tool**
+1. **01_langchain_react**
+   - 목표: ReAct 루프 구조 파악 및 커스텀 툴 연결
+   - 확인: Thought/Action/Observation 로그 분석, 결과 품질 평가
+   - 토론: "ReAct 패턴과 MCP 툴을 어떻게 결합할 수 있을까?"
+
+2. **02_fastmcp_tool**
    - 목표: FastMCP 서버 구조 이해, `@app.tool` 패턴 실습
    - 확인: 클라이언트에서 툴 목록 확인 및 `greet` 호출 성공
    - 확장 질문: "추가 도구를 만들어보자면 어떤 데이터가 필요할까요?"
 
-2. **02_fastmcp_package**
+3. **03_fastmcp_package**
    - 목표: MCP 서버를 패키징하고 PyPI(TestPyPI) 배포 후 `fastmcp.json`에 등록하는 과정 이해
    - 확인: `pip install agentic-hello-mcp` 또는 `pipx run --spec agentic-hello-mcp hello-mcp-server`로 실행이 가능한지 검증
    - 연습: `marketing_update` 툴을 수정하고 버전 올려 재배포 / TestPyPI 업로드 시나리오 실습
-
-3. **03_langchain_react**
-   - 목표: ReAct 루프 구조 파악 및 커스텀 툴 연결
-   - 확인: Thought/Action/Observation 로그 분석, 결과 품질 평가
-   - 토론: "ReAct 패턴과 MCP 툴을 어떻게 결합할 수 있을까?"
 
 4. **04_langchain_mcp**
    - 목표: LangChain 에이전트가 MCP 툴과 로컬 툴을 혼합해 사용하는 흐름 이해
    - 확인: 로그에서 MCP 툴 호출이 수행되고 structured content를 응답에 반영하는지 확인
    - 연습: MCP 서버에 새로운 툴을 추가하고 에이전트 브리징 함수를 수정해 보기
 
-5. **05_crewai_team**
-   - 목표: CrewAI 에이전트/태스크 모델 이해, `human_input=True` 체험
-   - 확인: 영업 담당자 피드백 입력 후 이메일이 어떻게 달라지는지 관찰
-   - 연습: 새로운 역할(예: Legal Reviewer) 추가해보기
-
-6. **06_mem0_basics**
+5. **05_mem0_basics**
    - 목표: mem0 API로 개인 정보 저장/검색/요약 흐름 이해
    - 확인: `client.search` 결과가 기대와 일치하는지 비교
    - 토론: "mem0 데이터를 갱신하거나 삭제할 때 주의할 점은?"
 
-7. **07_mem0_cli_chat**
+6. **06_mem0_cli_chat**
    - 목표: CLI 환경에서 mem0 장기 기억을 체험하도록 구성
    - 확인: 저장된 기억이 출력되고 답변에 반영되는지 확인
    - 연습: user_id를 CLI 인자/환경 변수로 받아 멀티사용자 지원 실습
+
+7. **07_crewai_team**
+   - 목표: CrewAI 에이전트/태스크 모델 이해, `human_input=True` 체험
+   - 확인: 영업 담당자 피드백 입력 후 이메일이 어떻게 달라지는지 관찰
+   - 연습: 새로운 역할(예: Legal Reviewer) 추가해보기
 
 8. **08_a2a_basics**
    - 목표: AutoGen GroupChatManager 기본 구조 이해

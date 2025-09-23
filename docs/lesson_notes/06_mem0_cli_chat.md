@@ -1,4 +1,4 @@
-# 07_mem0_cli_chat – 학습 노트
+# 06_mem0_cli_chat – 학습 노트
 
 ## 학습 목표
 - Streamlit 없이 터미널 환경에서 mem0 장기 기억 흐름을 체험

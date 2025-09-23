@@ -1,4 +1,4 @@
-# 02_fastmcp_package – 학습 노트
+# 03_fastmcp_package – 학습 노트
 
 ## 학습 목표
 - FastMCP 서버를 Python 패키지로 배포하고 PyPI(TestPyPI)를 통해 배포하는 절차 이해

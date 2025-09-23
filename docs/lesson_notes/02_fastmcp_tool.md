@@ -1,4 +1,4 @@
-# 01_fastmcp_tool – 학습 노트
+# 02_fastmcp_tool – 학습 노트
 
 ## 학습 목표
 - FastMCP 서버의 기본 구조와 `@app.tool` 데코레이터 사용법 이해

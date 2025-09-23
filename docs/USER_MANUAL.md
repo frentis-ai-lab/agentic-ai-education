@@ -26,7 +26,7 @@ export OPENAI_MODEL=gpt-4o-mini  # (선택)
 ## 3. 공통 실행 흐름
 각 단계 폴더에 진입한 뒤 아래 순서로 진행합니다.
 ```bash
-cd 01_fastmcp_tool  # 예시
+cd 02_fastmcp_tool  # 예시
 uv sync             # 의존성 설치
 uv run python server.py
 uv run python client.py
@@ -36,13 +36,13 @@ uv run python client.py
 ## 4. 단계별 요약 및 사용법
 | 단계 | 주제 | 핵심 명령 | 비고 |
 | --- | --- | --- | --- |
-| 01_fastmcp_tool | FastMCP 툴/클라이언트 기초 | `uv run python server.py` / `uv run python client.py` | 단일 프로세스 테스트 포함 |
-| 02_fastmcp_package | FastMCP 서버 패키징 & PyPI 배포 | `uv build`, `uvx twine upload`, `pip install` / `pipx run agentic-hello-mcp` | `fastmcp.json` 예시 제공 |
-| 03_langchain_react | LangChain ReAct 패턴 | `uv run python react_agent.py` | OpenAI API 키 필요 |
+| 01_langchain_react | LangChain ReAct 패턴 | `uv run python react_agent.py` | OpenAI API 키 필요 |
+| 02_fastmcp_tool | FastMCP 툴/클라이언트 기초 | `uv run python server.py` / `uv run python client.py` | 단일 프로세스 테스트 포함 |
+| 03_fastmcp_package | FastMCP 서버 패키징 & PyPI 배포 | `uv build`, `uvx twine upload`, `pip install` / `pipx run agentic-hello-mcp` | `fastmcp.json` 예시 제공 |
 | 04_langchain_mcp | LangChain + MCP 혼합 워크플로우 | `uv run python react_with_mcp.py` | MCP 서버 임베드, 필요 시 별도 실행 |
-| 05_crewai_team | CrewAI 협업 플로우 | `uv run python crew_run.py` | 영업 담당자 입력을 콘솔에서 직접 제공 |
-| 06_mem0_basics | mem0 메모리 CRUD | `uv run python memory_demo.py` | MEM0 API 키 필요 |
-| 07_mem0_cli_chat | mem0 장기 기억 CLI | `uv run python chat_cli.py` | Streamlit 없이 터미널에서 기억 활용 체험 |
+| 05_mem0_basics | mem0 메모리 CRUD | `uv run python memory_demo.py` | MEM0 API 키 필요 |
+| 06_mem0_cli_chat | mem0 장기 기억 CLI | `uv run python chat_cli.py` | Streamlit 없이 터미널에서 기억 활용 체험 |
+| 07_crewai_team | CrewAI 협업 플로우 | `uv run python crew_run.py` | 영업 담당자 입력을 콘솔에서 직접 제공 |
 | 08_a2a_basics | AutoGen a2a 기본 | `uv run python basic_chat.py` | GroupChatManager 로깅 관찰 |
 | 09_a2a_mem0_profile | mem0 + a2a | `uv run python personal_agents.py` | `search_profile` 툴 호출 흐름 확인 |
 | 10_a2a_dual_agents | CrewAI & LangGraph A2A 서버 + UI | 각 하위 폴더에서 `uv run uvicorn ...` | 세 개의 프로세스를 띄워 브라우저로 테스트 |
