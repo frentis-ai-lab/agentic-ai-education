@@ -15,3 +15,5 @@ __pycache__/
 # Packaging artifacts
 *.egg-info/
 dist/
+
+.ignore
