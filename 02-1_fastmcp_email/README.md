@@ -44,18 +44,26 @@ uv run python client.py
 
 ### 3. Claude Desktop에서 사용
 
-`mcp.json` 파일에 추가:
+HTTP 서버 연결을 위해 `mcp-remote` 프록시 사용:
+
 ```json
 {
   "mcpServers": {
     "email-tool": {
-      "url": "http://localhost:8000/mcp/"
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "http://localhost:8000/mcp/"],
+      "env": {
+        "MCP_TRANSPORT_STRATEGY": "http-only"
+      }
     }
   }
 }
 ```
 
-**주의**: Claude Desktop FREE 버전은 HTTP MCP 서버를 지원하지 않습니다. Cursor나 다른 MCP 클라이언트를 사용하세요.
+**주의**:
+- Claude Desktop은 HTTP 서버에 직접 연결 불가 (프록시 필요)
+- FREE 버전은 HTTP MCP 지원 제한
+- `npx mcp-remote` 패키지가 필요할 수 있음
 
 ## 문제 해결
 
