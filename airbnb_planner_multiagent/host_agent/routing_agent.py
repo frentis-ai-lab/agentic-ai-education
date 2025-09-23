@@ -119,6 +119,14 @@ class RoutingAgent:
             agent_info.append(json.dumps(agent_detail_dict))
         self.agents = '\n'.join(agent_info)
 
+    async def cleanup(self):
+        """Clean up all remote agent connections to prevent resource leaks."""
+        for connection in self.remote_agent_connections.values():
+            try:
+                await connection.cleanup()
+            except Exception as e:
+                print(f'Error cleaning up connection: {e}')
+
     @classmethod
     async def create(
         cls,
@@ -229,9 +237,15 @@ class RoutingAgent:
         if not client:
             raise ValueError(f'Client not available for {agent_name}')
 
-        # Reuse previously assigned identifiers when continuing an existing task.
+        # Check if there's a completed task to avoid reusing completed task IDs
         task_id = state.get('task_id')
         context_id = state.get('context_id')
+
+        # Reset task_id if the previous task was completed
+        if state.get('task_completed'):
+            task_id = None
+            context_id = None
+            state['task_completed'] = False
 
         message_id = (
             state.get('input_message_metadata', {}).get('message_id')
@@ -283,20 +297,33 @@ class RoutingAgent:
             state['context_id'] = task_result.context_id
         state['input_message_metadata'] = {'message_id': message_id}
 
+        # Mark task as completed if it's in completed state
+        if hasattr(task_result, 'status') and hasattr(task_result.status, 'state'):
+            if task_result.status.state == 'completed':
+                state['task_completed'] = True
+
         return task_result
 
 
+# Store the routing agent instance for cleanup
+_routing_agent_instance = None
+
 def _get_initialized_routing_agent_sync() -> Agent:
     """Synchronously creates and initializes the RoutingAgent."""
+    global _routing_agent_instance
 
     async def _async_main() -> Agent:
-        routing_agent_instance = await RoutingAgent.create(
+        global _routing_agent_instance
+        _routing_agent_instance = await RoutingAgent.create(
             remote_agent_addresses=[
                 os.getenv('AIR_AGENT_URL', 'http://localhost:10002'),
                 os.getenv('WEA_AGENT_URL', 'http://localhost:10001'),
             ]
         )
-        return routing_agent_instance.create_agent()
+        agent = _routing_agent_instance.create_agent()
+        # Store reference to routing instance for cleanup
+        agent._routing_agent_instance = _routing_agent_instance
+        return agent
 
     try:
         return asyncio.run(_async_main())

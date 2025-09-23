@@ -115,12 +115,25 @@ async def main():
             description='This assistant can help you to check weather and find airbnb accommodation',
         )
 
-    print('Launching Gradio interface...')
-    demo.queue().launch(
-        server_name='0.0.0.0',
-        server_port=8083,
-    )
-    print('Gradio application has been shut down.')
+    try:
+        print('Launching Gradio interface...')
+        demo.queue().launch(
+            server_name='0.0.0.0',
+            server_port=8083,
+        )
+    finally:
+        print('Cleaning up resources...')
+        # Import and cleanup routing agent if it exists
+        try:
+            from routing_agent import ROUTING_AGENT_RUNNER
+            if hasattr(ROUTING_AGENT_RUNNER.agent, '_routing_agent_instance'):
+                routing_instance = ROUTING_AGENT_RUNNER.agent._routing_agent_instance
+                if hasattr(routing_instance, 'cleanup'):
+                    await routing_instance.cleanup()
+                    print('Routing agent resources cleaned up.')
+        except Exception as e:
+            print(f'Error during cleanup: {e}')
+        print('Gradio application has been shut down.')
 
 
 if __name__ == '__main__':

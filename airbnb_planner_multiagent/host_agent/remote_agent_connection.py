@@ -39,3 +39,8 @@ class RemoteAgentConnections:
         self, message_request: SendMessageRequest
     ) -> SendMessageResponse:
         return await self.agent_client.send_message(message_request)
+
+    async def cleanup(self):
+        """Clean up httpx client resources to prevent connection leaks."""
+        if self._httpx_client and not self._httpx_client.is_closed:
+            await self._httpx_client.aclose()
