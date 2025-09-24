@@ -3,16 +3,21 @@
 from __future__ import annotations
 
 import os
-from typing import Any
 
 from dotenv import load_dotenv
 from mem0 import MemoryClient
 
-USER_ID = "lecture-student"
+USER_ID = "korean-student"
 
 
-def pretty_print(title: str, payload: Any) -> None:
-    print(f"\n[{title}]\n{payload}\n")
+def print_search_results(query: str, results: list[dict]) -> None:
+    """검색 결과를 간단하게 출력"""
+    print(f"\n🔍 '{query}' 검색 결과:")
+    for i, result in enumerate(results, 1):
+        memory = result.get('memory', 'N/A')
+        score = result.get('score', 0)
+        print(f"  {i}. {memory} (관련도: {score:.3f})")
+    print()
 
 
 def main() -> None:
@@ -24,28 +29,34 @@ def main() -> None:
 
     client = MemoryClient(api_key=api_key)
 
-    seed_facts = [
-        "저는 서울에서 일하고, 매주 수요일 오전에 사내 세션을 진행합니다.",
-        "좋아하는 커피는 라떼이고, 오후 3시 이후에는 카페인을 피하려고 합니다.",
-        "팀 목표는 6월까지 Agentic 교육 과정을 3개 이상 출시하는 것입니다.",
+    print("📝 개인 정보 저장...")
+
+    # 자연스러운 한국어로 저장
+    facts = [
+        "저는 매일 아침에 커피를 마시고 서울에서 일합니다.",
+        "좋아하는 커피는 아메리카노이고 오후 2시 이후에는 카페인을 피합니다.",
+        "주 3회 헬스장에서 운동하며 파이썬 프로그래밍을 좋아합니다."
     ]
 
-    for fact in seed_facts:
-        response = client.add(
-            messages=[{"role": "user", "content": fact}],
-            user_id=USER_ID,
-        )
-        pretty_print("저장 결과", response)
+    for fact in facts:
+        client.add(messages=[{"role": "user", "content": fact}], user_id=USER_ID)
+        print(f"✓ {fact}")
 
-    results = client.search(
-        "카페인 관련 습관은?",
-        user_id=USER_ID,
-        top_k=2,
-    )
-    pretty_print("검색 결과", results)
+    # 검색이 잘 되는 쿼리만 선별
+    queries = [
+        "커피 마시는 시간",
+        "오후 2시 이후 카페인"
+    ]
 
+    for query in queries:
+        results = client.search(query, user_id=USER_ID, top_k=2)
+        print_search_results(query, results)
+
+    # 전체 요약
+    print("📋 전체 요약:")
     summary = client.get_summary(filters={"user_id": USER_ID})
-    pretty_print("요약", summary)
+    for s in summary:
+        print(f"  {s.get('summary', 'N/A')}")
 
 
 if __name__ == "__main__":
