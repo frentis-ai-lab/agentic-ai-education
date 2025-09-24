@@ -11,7 +11,7 @@ OpenAI + Gmail SMTP를 사용한 이메일 작성 및 발송 MCP 서버
 ## 설치
 
 ```bash
-cd 02-1_fastmcp_email
+cd 03_fastmcp_email
 uv sync
 cp .env.example .env
 # .env 파일에서 API 키 설정
